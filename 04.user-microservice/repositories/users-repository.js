@@ -1,4 +1,4 @@
-class UsersRepository {
+class UserRepository {
   constructor({ mapper, idGenerator }) {
     this.mapper = mapper;
     this.idGenerator = idGenerator;
@@ -12,7 +12,7 @@ class UsersRepository {
     }
   }
 
-  async getOneUserBy(field, value) {
+  async getUserBy(field, value) {
     try {
       const allUsers = await this.mapper.read();
 
@@ -44,18 +44,6 @@ class UsersRepository {
       throw error;
     }
   }
-
-  async deleteOneUserBy(field, value) {
-    try {
-      const allUsers = await this.mapper.read();
-
-      const filteredUsers = allUsers.filter(user => user[field] !== value);
-
-      await this.mapper.write(filteredUsers);
-    } catch (error) {
-      throw error;
-    }
-  }
 }
 
-module.exports = UsersRepository;
+module.exports = UserRepository;

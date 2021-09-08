@@ -1,18 +1,31 @@
+const { HttpCodes } = require('../helpers/constants');
 class UserControllers {
+  constructor(repository) {
+    this.repository = repository;
+  }
+
   async get(req, res, next) {
-    return res.send('Not implemented.');
+    try {
+      const { userId } = req.params;
+
+      const user = await this.repository.getUserBy('id', userId);
+
+      return res.json({ user });
+    } catch (error) {
+      next(error);
+    }
   }
 
   async create(req, res, next) {
-    return res.send('Not implemented.');
-  }
+    try {
+      const { name, email, password } = req.body;
 
-  async update(req, res, next) {
-    return res.send('Not implemented.');
-  }
+      const user = await this.repository.addNewUser({ name, email, password });
 
-  async delete(req, res, next) {
-    return res.send('Not implemented.');
+      return res.status(HttpCodes.CREATED).json({ user });
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
