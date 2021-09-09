@@ -1,4 +1,4 @@
-const { HttpCodes, Messages } = require('../helpers/constants');
+const { HttpCodes } = require('../helpers/constants');
 class AuthControllers {
   constructor(microservice) {
     this.microservice = microservice;
