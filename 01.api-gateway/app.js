@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
-const authRouter = require('./routes/auth-router');
+const { authRouter } = require('./routes/auth-router');
 const ratesRouter = require('./routes/rates-router');
 
 const { HttpCodes, Messages } = require('./helpers/constants');

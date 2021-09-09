@@ -35,6 +35,16 @@ class AuthMicroService {
     });
   }
 
+  async verify(token) {
+    const { ip, port } = await this.getService();
+
+    return await this.callService({
+      method: 'post',
+      data: { token },
+      url: `http://${ip}:${port}/auth/verify`,
+    });
+  }
+
   async getService() {
     const { data } = await axios.get(
       `${this.serviceRegistryUrl}/find/${this.serviceName}`,
