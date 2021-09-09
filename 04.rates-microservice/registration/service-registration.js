@@ -15,9 +15,9 @@ class ServiceRegistration {
     );
   }
 
-  async cleanup(server, intervalId) {
+  async cleanup(server, intervalId, name) {
     clearInterval(intervalId);
-    await this.unregisterService(server);
+    await this.unregisterService(server, name);
   }
 }
 

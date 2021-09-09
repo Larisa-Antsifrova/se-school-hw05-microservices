@@ -17,7 +17,7 @@ const server = app.listen(0, () => {
   );
 
   process.on('SIGTERM', () => {
-    serviceRegistration.cleanup(server, interval);
+    serviceRegistration.cleanup(server, interval, name);
 
     console.log('SIGTERM signal received: closing HTTP server');
     server.close(() => {
@@ -26,7 +26,7 @@ const server = app.listen(0, () => {
   });
 
   process.on('SIGINT', () => {
-    serviceRegistration.cleanup(server, interval);
+    serviceRegistration.cleanup(server, interval, name);
 
     console.log('SIGINT signal received: closing HTTP server');
     server.close(() => {
