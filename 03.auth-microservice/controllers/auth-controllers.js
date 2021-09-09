@@ -34,16 +34,6 @@ class AuthControllers {
       next(error);
     }
   }
-
-  async logout(req, res, next) {
-    try {
-      await this.authService.logout();
-
-      return res.status(HttpCodes.NO_CONTENT).json({});
-    } catch (error) {
-      next(error);
-    }
-  }
 }
 
 module.exports = AuthControllers;

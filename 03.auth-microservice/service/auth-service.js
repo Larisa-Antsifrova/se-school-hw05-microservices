@@ -1,8 +1,8 @@
-/* eslint-disable no-useless-catch */
 const { HttpCodes, Messages } = require('../helpers/constants');
 
 class AuthService {
-  constructor({ passwordService, tokenService, errorHandler }) {
+  constructor({ repository, passwordService, tokenService, errorHandler }) {
+    this.repository = repository;
     this.passwordService = passwordService;
     this.tokenService = tokenService;
     this.errorHandler = errorHandler;
@@ -10,27 +10,22 @@ class AuthService {
 
   async signup({ name, email, password }) {
     try {
-      // TODO: send Queue message to check if User exists
-      // const doesAlreadyExist = await this.usersCollection.getOneUserBy(
-      //   'email',
-      //   email,
-      // );
+      const doesAlreadyExist = await this.repository.getUserBy('email', email);
 
-      // if (doesAlreadyExist) {
-      //   throw new this.errorHandler({
-      //     status: HttpCodes.CONFLICT,
-      //     message: Messages.emailConflict,
-      //   });
-      // }
+      if (doesAlreadyExist) {
+        throw new this.errorHandler({
+          status: HttpCodes.CONFLICT,
+          message: Messages.emailConflict,
+        });
+      }
 
-      // const hashedPassword = await this.passwordService.hash(password);
+      const hashedPassword = await this.passwordService.hash(password);
 
-      // return await this.usersCollection.addNewUser({
-      //   name,
-      //   email,
-      //   password: hashedPassword,
-      // });
-      return 'Not implemented';
+      return await this.repository.addNewUser({
+        name,
+        email,
+        password: hashedPassword,
+      });
     } catch (error) {
       throw error;
     }
@@ -38,7 +33,7 @@ class AuthService {
 
   async login({ email, password }) {
     try {
-      const user = await this.usersCollection.getOneUserBy('email', email);
+      const user = await this.repository.getUserBy('email', email);
 
       if (!user) {
         throw new this.errorHandler({
@@ -61,7 +56,7 @@ class AuthService {
 
       const { id, name, email: userEmail } = user;
 
-      const token = this.tokenService.generateToken({
+      const token = this.tokenService.generate({
         id,
         name,
         email: userEmail,
