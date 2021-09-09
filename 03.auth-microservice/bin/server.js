@@ -1,38 +1,24 @@
 require('dotenv').config();
-const axios = require('axios');
 
 const app = require('../app');
-const { Ports } = require('../helpers/constants');
-const { SERVICE_REGISTRY_URL } = process.env;
+const { name } = require('../package.json');
+const ServiceRegistration = require('../registration/service-registration');
 
-const PORT = process.env.PORT || Ports.default;
+const serviceRegistration = new ServiceRegistration();
 
 const server = app.listen(0, () => {
-  const registerService = () =>
-    axios.put(
-      `${SERVICE_REGISTRY_URL}/register/auth-service/${server.address().port}`,
-    );
+  serviceRegistration.registerService(server, name);
 
-  const unregisterService = () =>
-    axios.delete(
-      `${SERVICE_REGISTRY_URL}/unregister/auth-service/${
-        server.address().port
-      }`,
-    );
+  console.log(`Server is running on port ${server.address().port}`);
 
-  registerService();
-
-  console.log(`Server is running on port ${PORT}`);
-
-  const interval = setInterval(registerService, 20 * 1000);
-
-  const cleanup = async () => {
-    clearInterval(interval);
-    await unregisterService();
-  };
+  const interval = setInterval(
+    () => serviceRegistration.registerService(server, name),
+    20 * 1000,
+  );
 
   process.on('SIGTERM', () => {
-    cleanup();
+    serviceRegistration.cleanup(server, interval);
+
     console.log('SIGTERM signal received: closing HTTP server');
     server.close(() => {
       console.log('HTTP server closed');
@@ -40,7 +26,8 @@ const server = app.listen(0, () => {
   });
 
   process.on('SIGINT', () => {
-    cleanup();
+    serviceRegistration.cleanup(server, interval);
+
     console.log('SIGINT signal received: closing HTTP server');
     server.close(() => {
       console.log('HTTP server closed');
