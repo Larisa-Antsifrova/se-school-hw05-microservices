@@ -26,13 +26,13 @@ class ServiceRegistry {
       this.services[key].port = port;
       this.services[key].name = name;
 
-      console.log(`Added services ${name}, at ${ip}:${port}`);
+      console.log(`Added service ${name} at ${ip}:${port}`);
       return key;
     }
 
     this.services[key].timestamp = Math.floor(new Date() / 1000);
 
-    console.log(`Updated services ${name}, at ${ip}:${port}`);
+    console.log(`Updated service ${name} at ${ip}:${port}`);
 
     return key;
   }
@@ -42,7 +42,7 @@ class ServiceRegistry {
 
     delete this.services[key];
 
-    console.log(`Unregistered services ${name}, at ${ip}:${port}`);
+    console.log(`Unregistered service ${name} at ${ip}:${port}`);
 
     return key;
   }

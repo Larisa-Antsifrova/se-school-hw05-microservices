@@ -17,6 +17,7 @@ const Ports = {
 
 const Messages = {
   notFound: 'Not found.',
+  noJWT: 'JWT token is not provided.',
 };
 
 module.exports = { HttpCodes, Ports, Messages };

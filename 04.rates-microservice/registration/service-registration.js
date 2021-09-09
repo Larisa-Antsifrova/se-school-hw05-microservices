@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require('axios');
 
 const { SERVICE_REGISTRY_URL } = process.env;
