@@ -15,6 +15,26 @@ class AuthMicroService {
     });
   }
 
+  async signup({ name, email, password }) {
+    const { ip, port } = await this.getService();
+
+    return await this.callService({
+      method: 'post',
+      data: { name, email, password },
+      url: `http://${ip}:${port}/auth/signup`,
+    });
+  }
+
+  async login({ email, password }) {
+    const { ip, port } = await this.getService();
+
+    return await this.callService({
+      method: 'post',
+      data: { email, password },
+      url: `http://${ip}:${port}/auth/login`,
+    });
+  }
+
   async getService() {
     const { data } = await axios.get(
       `${this.serviceRegistryUrl}/find/${this.serviceName}`,

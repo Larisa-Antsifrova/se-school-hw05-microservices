@@ -1,14 +1,37 @@
+const { HttpCodes, Messages } = require('../helpers/constants');
 class AuthControllers {
+  constructor(microservice) {
+    this.microservice = microservice;
+  }
+
   async signup(req, res, next) {
-    return res.send('Not implemented.');
+    try {
+      const { name, email, password } = req.body;
+
+      const response = await this.microservice.signup({
+        name,
+        email,
+        password,
+      });
+
+      return res.status(HttpCodes.CREATED).json({ ...response });
+    } catch (error) {
+      next(error);
+    }
   }
 
   async login(req, res, next) {
-    return res.send('Not implemented.');
-  }
+    try {
+      const { email, password } = req.body;
 
-  async logout(req, res, next) {
-    return res.send('Not implemented.');
+      const response = await this.microservice.login({ email, password });
+
+      return res.status(HttpCodes.OK).json({
+        ...response,
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
