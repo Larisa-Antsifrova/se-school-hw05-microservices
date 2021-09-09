@@ -1,24 +1,36 @@
 require('dotenv').config();
 
 const app = require('../app');
-const { Ports } = require('../helpers/constants');
+const { name } = require('../package.json');
+const ServiceRegistration = require('../registration/service-registration');
 
-const PORT = process.env.PORT || Ports.default;
+const serviceRegistration = new ServiceRegistration();
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const server = app.listen(0, () => {
+  serviceRegistration.registerService(server, name);
 
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  server.close(() => {
-    console.log('HTTP server closed');
+  console.log(`Server is running on port ${server.address().port}`);
+
+  const interval = setInterval(
+    () => serviceRegistration.registerService(server, name),
+    20 * 1000,
+  );
+
+  process.on('SIGTERM', () => {
+    serviceRegistration.cleanup(server, interval);
+
+    console.log('SIGTERM signal received: closing HTTP server');
+    server.close(() => {
+      console.log('HTTP server closed');
+    });
   });
-});
 
-process.on('SIGINT', () => {
-  console.log('SIGINT signal received: closing HTTP server');
-  server.close(() => {
-    console.log('HTTP server closed');
+  process.on('SIGINT', () => {
+    serviceRegistration.cleanup(server, interval);
+
+    console.log('SIGINT signal received: closing HTTP server');
+    server.close(() => {
+      console.log('HTTP server closed');
+    });
   });
 });
