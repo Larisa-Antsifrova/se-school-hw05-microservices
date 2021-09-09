@@ -1,10 +1,13 @@
 const express = require('express');
 
+const registryRouter = require('./routes/registry-router');
 const { HttpCodes, Messages } = require('./helpers/constants');
 
 const app = express();
 
 app.use(express.json());
+
+app.use(registryRouter);
 
 app.use((req, res) => {
   return res.status(HttpCodes.NOT_FOUND).json({ message: Messages.notFound });

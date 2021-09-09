@@ -27,7 +27,6 @@ class ServiceRegistry {
       this.services[key].name = name;
 
       console.log(`Added services ${name}, at ${ip}:${port}`);
-
       return key;
     }
 
