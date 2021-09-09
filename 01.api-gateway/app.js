@@ -2,7 +2,6 @@ const express = require('express');
 const helmet = require('helmet');
 
 const authRouter = require('./routes/auth-router');
-const userRouter = require('./routes/user-router');
 const ratesRouter = require('./routes/rates-router');
 
 const { HttpCodes, Messages } = require('./helpers/constants');
@@ -13,7 +12,6 @@ app.use(helmet());
 app.use(express.json());
 
 app.use(authRouter);
-app.use(userRouter);
 app.use(ratesRouter);
 
 app.use((req, res) => {
