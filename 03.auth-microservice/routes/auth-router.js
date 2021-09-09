@@ -43,4 +43,6 @@ authRouter.post('/auth/signup', authControllers.signup.bind(authControllers));
 
 authRouter.post('/auth/login', authControllers.login.bind(authControllers));
 
+authRouter.post('/auth/verify', authControllers.verify.bind(authControllers));
+
 module.exports = authRouter;

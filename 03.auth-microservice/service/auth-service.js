@@ -67,6 +67,10 @@ class AuthService {
       throw error;
     }
   }
+
+  async verify(token) {
+    return this.tokenService.verify(token);
+  }
 }
 
 module.exports = AuthService;

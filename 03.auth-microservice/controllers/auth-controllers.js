@@ -34,6 +34,23 @@ class AuthControllers {
       next(error);
     }
   }
+
+  async verify(req, res, next) {
+    try {
+      const { token } = req.body;
+
+      await this.authService.verify(token);
+
+      return res.status(HttpCodes.OK).json({
+        valid: true,
+      });
+    } catch (error) {
+      return res.status(HttpCodes.UNAUTHORIZED).json({
+        valid: false,
+        message: error.message,
+      });
+    }
+  }
 }
 
 module.exports = AuthControllers;
