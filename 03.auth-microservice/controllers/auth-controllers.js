@@ -35,13 +35,20 @@ class AuthControllers {
     }
   }
 
-  async logout(req, res, next) {
+  async verify(req, res, next) {
     try {
-      await this.authService.logout();
+      const { token } = req.body;
 
-      return res.status(HttpCodes.NO_CONTENT).json({});
+      await this.authService.verify(token);
+
+      return res.status(HttpCodes.OK).json({
+        valid: true,
+      });
     } catch (error) {
-      next(error);
+      return res.status(HttpCodes.UNAUTHORIZED).json({
+        valid: false,
+        message: error.message,
+      });
     }
   }
 }
