@@ -17,7 +17,10 @@ The homework's motto:
 
 - _...Software is made of feelings. (с) A.A._
 
-P.s. For education purposes, separate microservices are stored in one GitHub repository. Details about each component are provided in corresponding Readme files in each subdirectory.
+P.s. For education purposes:
+
+- separate microservices are stored in one GitHub repository. Details about each component are provided in corresponding Readme files in each subdirectory.
+- db file is commited as an example.
 
 ## Note to code reviewer
 
@@ -37,7 +40,43 @@ Happy reviewing!
 
 ## Setting up the app locally
 
-IN PROGRESS...
+1. Clone the repository:
+
+```
+      git clone https://github.com/Larisa-Antsifrova/se-school-hw05-microservices.git
+```
+
+2. Go to the cloned project folder:
+
+```
+      cd se-school-hw05-microservices
+```
+
+3. Create .env files as per .env.example files in each subdirectory.
+
+4. Being in root directory run:
+
+```
+      docker-compose build
+```
+
+```
+      docker-compose up -d
+```
+
+5. Cross your fingers.
+
+6. Go to http://localhost:8877 in browser. Exprested result:
+
+```shell
+
+Status: 200 OK
+Content-Type: application/json
+ResponseBody: {
+  "message": "Hello and welcome! :)"
+}
+
+```
 
 ## Endpoints
 
