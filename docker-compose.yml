@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  api-gateway:
+    container_name: api-gateway
+    restart: always
+    build: ./01.api-gateway
+    ports:
+      - '8877:8877'
+    environment:
+      - SERVICE_REGISTRY_URL=http://service-registry:4444
+    depends_on:
+      - service-registry
+      - auth-microservice
+      - rates-microservice
+  service-registry:
+    container_name: service-registry
+    restart: always
+    build: ./02.service-registry
+    ports:
+      - '4444:4444'
+  auth-microservice:
+    container_name: auth-microservice
+    restart: always
+    build: ./03.auth-microservice
+    environment:
+      - SERVICE_REGISTRY_URL=http://service-registry:4444
+    depends_on:
+      - service-registry
+  rates-microservice:
+    container_name: rates-microservice
+    restart: always
+    build: ./04.rates-microservice
+    environment:
+      - SERVICE_REGISTRY_URL=http://service-registry:4444
+    depends_on:
+      - service-registry
