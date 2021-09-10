@@ -23,7 +23,7 @@ P.s. For the education purposes, separate microservices are stored in one GitHub
 
 Hi Andrii!  
 &nbsp;
-WORK IN PROGRESS...
+IN PROGRESS...
 
 ## Project's architecture overview
 
@@ -31,7 +31,7 @@ WORK IN PROGRESS...
 
 ## Setting up the app locally
 
-WORK IN PROGRESS...
+IN PROGRESS...
 
 ## Endpoints
 
@@ -100,3 +100,34 @@ Provides current rate of BTC to UAH.
 GET /rates
 
 ```
+
+## Tools
+
+- JavaScript (Node.js)
+- [Express](https://expressjs.com/) - Node.js web application framework.
+- [Axios](https://www.npmjs.com/package/axios) - for http requests.
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs) - for hashing passwords.
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - for generating, signing, verifying JWT.
+- [helmet](https://www.npmjs.com/package/helmet) - for securing the Web API.
+- [Joi](https://joi.dev/api/) - for validating data provided in POST requests.
+- [Postman](https://www.postman.com/) - for endpoints testing.
+- [diagrams.net](https://app.diagrams.net/) - for arch diagrams.
+
+## Resources
+
+Rates provider:
+
+- [Coinlayer](https://coinlayer.com/documentation)
+
+Microservices:
+
+- [Pattern: API Gateway / Backends for Frontends](https://microservices.io/patterns/apigateway.html)
+- [Pattern: Server-side service discovery](https://microservices.io/patterns/server-side-discovery.html)
+- [WDJ Node JS Microservices Tutorial](https://www.youtube.com/playlist?list=PLrwNNiB6YOA0KmfliJoSuZzEN6tjSdEXc)
+- [Microservices Meetup - HighLoad Conference](https://www.youtube.com/watch?v=z7AIKbydOJE&ab_channel=HighLoadChannel)
+- Monolith to Microservices by Sam Newman (O'Reilly). Copyright 2020 Sam Newman, 978-1-492-07554-7.
+
+Extra:
+
+- [Docker](https://docs.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
