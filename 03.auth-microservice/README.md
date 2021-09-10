@@ -2,8 +2,8 @@
 
 ## Description
 
-- When the app is launched, the ports are assigned dynamically.
-- Once the microservice is up, it sends HTTP request to Service Registry to register itself with current ip and port.
+- The ports are assigned dynamically.
+- Once the microservice is up, it sends an HTTP request to Service Registry to register itself with current IP and port.
 - The microservice receives requests from API Gateway and replies back.
 
 ## Location in the app's architecture
@@ -14,11 +14,11 @@
 
 | File/Folder  | Description                                                           |
 | :----------- | :-------------------------------------------------------------------- |
-| app.js       | Microservices's app                                                   |
+| app.js       | Microservice's app                                                    |
 | bin          | Server set up and listening                                           |
 | controllers  | Endpoints' handlers                                                   |
 | db           | Two file system database                                              |
-| exceptions   | Class to generate custom api errors                                   |
+| exceptions   | Class to generate custom API errors                                   |
 | fs_odm       | Layer to work directly with file system                               |
 | helpers      | Project's constants                                                   |
 | registration | Script for the microservice to register itself with Service Registery |
