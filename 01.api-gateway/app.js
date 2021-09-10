@@ -13,6 +13,9 @@ app.use(express.json());
 
 app.use(authRouter);
 app.use(ratesRouter);
+app.use('/', (req, res, next) => {
+  res.json({ message: 'Hello and welcome! :)' });
+});
 
 app.use((req, res) => {
   return res.status(HttpCodes.NOT_FOUND).json({ message: Messages.notFound });
