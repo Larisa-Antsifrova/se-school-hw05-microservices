@@ -23,7 +23,13 @@ P.s. For education purposes, separate microservices are stored in one GitHub rep
 
 Hi Andrii!  
 &nbsp;
-IN PROGRESS...
+Thank you for the homework task. Trying to manage a couple of moving parts instead of one is indeed a challenge :) And now the tradeoffs discussed during the lectures have become a reality.  
+&nbsp;
+The implementation has a lot to improve, but the goal was to implement Backend for Frontend with API Gateway, Server-side Service Discovery in the form of Service Registery, and two microservices.  
+&nbsp;
+I will be glad to hear any feedback, suggestions, and/or recommendations.  
+&nbsp;
+Happy reviewing!
 
 ## Project's architecture overview
 
